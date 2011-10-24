@@ -36,10 +36,10 @@ public class galou {
         Locale.setDefault(Locale.US);
         input = new BufferedReader(new InputStreamReader(System.in));
         //input = new BufferedReader(new FileReader("galou.in"));
-        readln();
-    	R = nextInt(); C = nextInt();
+        
         while(true) {        	
-        	
+        	readln();
+        	R = nextInt(); C = nextInt();
         	if(R == 0 && C == 0)
         		break;
         	
@@ -66,30 +66,18 @@ public class galou {
         		}
         	}
         	
-        	readln();
-        	int tmpR = nextInt(), tmpC = nextInt();
-        	
         	if(starts.isEmpty()) {
-        		int count = 0;
         		System.out.println();
             	for(char[] str : rengine) {
-            		System.out.print(str);
-            		count++;
-            		if(count < R)
-            			System.out.println();
+            		System.out.println(str);
             	}
-            	//if(tmpR != 0 && tmpC != 0)
-            		System.out.println();
-            	R = tmpR; C = tmpC;
             	continue;
         	}
         	
         	Point s = starts.removeFirst();
         	Node start = new Node(rengine, s.y, s.x);
-        	//dbg(dfs(start, visited));
-        	char[][] ans = null;        	
-        	ans = dfs(start);        	
-        	//dbg("first dfs = ", start.engine);        	
+        	char[][] ans = dfs(start);
+        	
         	boolean[][] visited = new boolean[R][C];
         	LinkedList<Point> blocks = new LinkedList<Point>();
         	
@@ -102,7 +90,6 @@ public class galou {
         				int xx = j + dx[k];
         				int yy = i + dy[k];
         				if(valid(xx, yy) && !visited[yy][xx] && ans[yy][xx] != '.' && ans[yy][xx] != 'F' && !validturn(ans[i][j], ans[yy][xx])) {
-        					//dbg("i = ", i, "j = ", j, "val = ", ans[i][j], " nval = ", ans[yy][xx], "xx = ", xx, "yy = ", yy,"!validturn = ", !validturn(ans[i][j], ans[yy][xx]));
         					ans[i][j] = 'B';
         					blocks.addLast(new Point(j, i));
         					break;
@@ -118,19 +105,11 @@ public class galou {
         		
     			ans = dfsBlock(start, blocks);       		        	
         	}
-        	int count = 0;
         	System.out.println();
         	for(char[] str : ans) {
-        		System.out.print(str);
-        		count++;
-        		if(count < R)
-        			System.out.println();
+        		System.out.println(str);
         	}
-        	//if(tmpR != 0 && tmpC != 0)
-        		System.out.println();
-        	R = tmpR; C = tmpC;
         }
-        System.exit(0);
     }
     
     static boolean valid(int x, int y) {
