@@ -78,7 +78,7 @@ public class galou {
             		if(count < R)
             			System.out.println();
             	}
-            	if(tmpR != 0 && tmpC != 0)
+            	//if(tmpR != 0 && tmpC != 0)
             		System.out.println();
             	R = tmpR; C = tmpC;
             	continue;
@@ -126,7 +126,7 @@ public class galou {
         		if(count < R)
         			System.out.println();
         	}
-        	if(tmpR != 0 && tmpC != 0)
+        	//if(tmpR != 0 && tmpC != 0)
         		System.out.println();
         	R = tmpR; C = tmpC;
         }
@@ -148,24 +148,18 @@ public class galou {
     static char[][] dfsBlock(Node start, LinkedList<Point> blocks) {
     	LinkedList<Node> g = new LinkedList<Node>();
     	g.addFirst(start);
-    	char[][] retengine = new char[R][C];
-    	for(int i = 0; i < R; i++) {
-    		retengine[i] = Arrays.copyOf(start.engine[i], C);
-    	}
+    	char[][] retengine = start.engine;
+    	
     	boolean[][] visited = new boolean[R][C]; // Visited positions
     	LinkedList<Point> cstarts = new LinkedList<Point>(blocks);
-    	int c = 1;
     	
     	while(!g.isEmpty()) {
     		Node e = g.removeFirst();
-    		
+    		    		
     		visited[e.i][e.j] = true;
     		
     		retengine = e.engine;
-    		
-    		if(c == (R*C))
-    			break;
-    		
+    		    		
     		for(int i = 0; i < 6; i++) {
     			int xx = e.j + dx[i];
     			int yy = e.i + dy[i];
@@ -179,7 +173,6 @@ public class galou {
         				Node ns = new Node(newengine, yy, xx);
         				g.addFirst(ns);
     				}
-    				c++;
     			}
     		}
     		
@@ -187,7 +180,6 @@ public class galou {
     			Point p = cstarts.removeFirst();
     			Node ns = new Node(retengine, p.y, p.x);
     			g.addFirst(ns);
-    			c++;
     		}
     	}
     	
@@ -200,7 +192,6 @@ public class galou {
     	char[][] retengine = null;
     	boolean[][] visited = new boolean[R][C]; // Visited positions
     	LinkedList<Point> cstarts = new LinkedList<Point>(starts);
-    	int c = 1;
     	
     	while(!g.isEmpty()) {
     		Node e = g.removeFirst();
@@ -208,10 +199,7 @@ public class galou {
     		visited[e.i][e.j] = true;
     		
     		retengine = e.engine;
-    		
-    		if(c == (R*C))
-    			break;
-    		
+    		    		
     		for(int i = 0; i < 6; i++) {
     			int xx = e.j + dx[i];
     			int yy = e.i + dy[i];
@@ -224,7 +212,6 @@ public class galou {
     				newengine[yy][xx] = nmov;
     				Node ns = new Node(newengine, yy, xx);
     				g.addFirst(ns);
-    				c++;
     			}
     		}
     		
@@ -232,7 +219,6 @@ public class galou {
     			Point p = cstarts.removeFirst();
     			Node ns = new Node(retengine, p.y, p.x);
     			g.addFirst(ns);
-    			c++;
     		}
     	}
     	
